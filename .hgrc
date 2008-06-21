@@ -1,0 +1,6 @@
+[ui]
+username=Ben Lowery <ben@blowery.org>
+editor=emacs
+
+[extensions]
+hgext.convert=
