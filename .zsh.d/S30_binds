@@ -1,0 +1,3 @@
+#! /bin/zsh
+
+bindkey -e #fixes the end-of-line history problem i was seeing. weird.

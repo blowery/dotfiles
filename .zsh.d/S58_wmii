@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+if [ "$PS1" -a ! -z "$DISPLAY" -a ! -z "$WMII_ADDRESS" ] ; then
+
+        #echo "setting up wmii shortcuts" >&2
+
+        # http://www.dmo.ca/blog/20070111010218
+        function on () 
+        {
+                TAG=$1
+                shift
+                echo "NextWindowTags $TAG" | wmiir write /event
+
+                $*
+        }
+
+        function cd () 
+        { 
+                builtin cd $@ \
+                && \
+                ( echo "ShellChangeDir $PWD" | wmiir write /event )
+        }
+
+        # ---- notify ------------------------------------------------------------
+
+        function wmiintf() {
+                col="$1" ; shift
+                msg="$@"
+
+                set -x
+                echo -n "$col $msg" | wmiir create /bar/000_ntf     
+                sleep 5
+
+                wmiir remove /bar/000_ntf
+        }
+
+        function nn() { 
+                cmd=$1 ; shift
+                args=${1+"$@"}
+                $cmd $args
+                rc=$?
+                if [ x$rc = x0 ] ; then
+                        wmiintf "#ffffff #22AA22 #00FF00" "$cmd $args"
+                else
+                        wmiintf "#ffffff #AA2222 #FF0000" "$cmd $args"
+                fi
+        }
+
+
+fi

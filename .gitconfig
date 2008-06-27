@@ -1,3 +1,7 @@
 [user]
 	email = ben@blowery.org
 	name = Ben Lowery
+[color]
+	diff = auto
+	status = auto
+	branch = auto

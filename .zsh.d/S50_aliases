@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+autoload zmv
+alias mmv='noglob zmv -W'
+
+if ( which sudo >/dev/null 2>/dev/null ) ; then
+        alias su='export XAUTHORITY=${HOME}/.Xauthority ; sudo -s'
+        alias sudo='export XAUTHORITY=${HOME}/.Xauthority ; sudo'
+fi
+
+alias du="du -hcs"
+alias df="df -h"
+
+alias ls="ls --color=auto"
+alias la="ls --color=always -a"
+alias ll="ls --color=always -l"
+alias lla="ls --color=always -la"
+alias lal="ls --color=always -la"
+
+#alias rm='rm -i'
+
+cvi () {
+    vim -O ${${1%.[hc]}%.}.{h,c}
+}
+
+xvi () {
+    vim -O ${${${1%.h}%.cpp}%.}.{h,cpp}
+}
+
+wt() { 
+        while true ; do ( $@ ) ; sleep 1 ; clear ; done
+}
+
+function bdiff() { diff "$1" "$2" || diff <(hex "$1") <(hex "$2") ; }
+
+yyyymmdd () { date +%Y%m%d ; }
+yyyymmdd-hhmmss () { date +%Y%m%d-%H%M%S ; }
+alias ymd=yyyymmdd
+alias ymd-hms=yyyymmdd-hhmmss
+
+function vman() { vim -c ":RMan ${*}" ; }
+function vimgrep () { tmp="$@" ; vim -c "vimgrep $tmp" ; }
+
+function xpwd () { echo $PWD | xclip -i ; xclip -o ; }
+function xcd () { cd `xclip -o` ; }
+
+# ccd x will do cd ../x
+alias cdd="cd `basename \`pwd\``"
+
+alias bender="sudo /ask/bloglines/current/code/httpd/bin/benderctl restart"
