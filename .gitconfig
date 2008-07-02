@@ -1,7 +1,15 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+[merge]
+  summary = true
 [user]
 	email = ben@blowery.org
 	name = Ben Lowery
-[color]
-	diff = auto
-	status = auto
-	branch = auto
